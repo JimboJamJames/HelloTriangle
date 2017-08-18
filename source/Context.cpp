@@ -47,3 +47,18 @@ bool Context::term()
 
 	return true;
 }
+
+double Context::getTime()
+{
+	return glfwGetTime();
+}
+
+bool Context::getKey(int key)
+{
+	return glfwGetKey(handle, key);
+}
+
+//void Context::getMousePosition(double &x_out, double &y_out)
+//{
+//	return glfwCreateCursor();
+//}
