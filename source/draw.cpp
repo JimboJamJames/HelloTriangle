@@ -23,9 +23,19 @@ void setUniform(const Shader &s, int location, float value)
 {
 	glProgramUniform1f(s.handle, location, value);
 }
+void setUniform(const Shader &s, int location, int value)
+{
+	glProgramUniform1f(s.handle, location, value);
+}
 void clearFramebuffer(const Framebuffer &f)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, f.handle);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+void setUniform(const Shader &shader, int location, const Texture &value, int slot)
+{
+	glActiveTexture(GL_TEXTURE0 + slot);
+	glBindTexture(GL_TEXTURE_2D, value.handle);
+	glProgramUniform1i(shader.handle, location, slot);
 }
