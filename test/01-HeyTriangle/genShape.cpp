@@ -39,12 +39,42 @@ Geometry makeNGon(size_t N, float r)
 
 Geometry makeCheckerboard(int dim, int size)
 {
+	unsigned vdim = dim + 1;
 	unsigned vsize = (dim+1)*(dim+1);
 	unsigned isize = 3 * 2 * dim * dim;
-	Vertex *verts = new Vertex[vsize];
+	Vertex   *verts = new Vertex[vsize];
 	unsigned *idxs = new unsigned[isize];
 
-	float step = dim / (float)size;
+	float step = size / dim;
+	float offset = size / 2;
+	int l = 0;
+	for (int i = 0; i < vsize; ++i)
+	{
+		float x = (i & vdim)*step - offset; //collumn
+		float y = (i / vdim)*step - offset; //rows
+
+
+		verts[i].position = { x,y,0,1 };
+		verts[i].color    = { rand() / (float)RAND_MAX, 
+							  rand() / (float)RAND_MAX,	
+							  rand() / (float)RAND_MAX, 1
+							};
+
+		if (i == 1 && dim > 1 ||	  //special case
+			i % vdim != 1 &&	  //right case
+			i / vdim != vdim - 1&&
+			l < isize) // bottom case
+		{
+			idxs[l++] = i;
+			idxs[l++] = i + 1;
+			idxs[l++] = i + vdim;
+
+			idxs[l++] = i + 1;
+			idxs[l++] = i + vdim;
+			idxs[l++] = i + vdim + 1;
+		}
+			
+	}
 
 	for (int i = 0; i < dim+1; ++i)
 	{

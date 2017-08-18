@@ -17,7 +17,7 @@ int main()
 						 0,3,1 };
 
 	Geometry g = makeGeometry(verts, 4, idxs, 6);
-	Geometry gt = makeNGon(100, .5f);
+	Geometry gt = makeCheckerboard(2, .5f);
 	//Geometry g = makeNGon(7, 6, 0);
 
 	const char* vsource = // once per vertex
