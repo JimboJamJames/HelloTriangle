@@ -32,8 +32,7 @@ int main()
 		"void main ()\n"
 		"{\n"
 		"gl_Position = position;\n"
-		//"gl_Position.x += cos(time*40+positopn.x)/2.0;\n"
-		"gl_Position.y *= sin(time+position.y)/5.0;\n"
+		"gl_Position.y *= sin(time*2-position.y)/1.5;\n"
 		"vColor = color;\n"
 		"vUV = position.xy;\n"
 		"}\n";
@@ -41,28 +40,24 @@ int main()
 	const char* fsource = // once per pixel
 		"#version 450\n"
 		"out vec4 outColor;\n"
-		/* "layout(location = 0) uniform float time;\n"
-		"layout(location = 1) uniform int tog;\n" */
 		"layout(location = 4) uniform sampler2D map;\n"
 		"in vec4 vColor;\n"
 		"in vec2  vUV;\n"
 		"void main ()\n"
 		"{\n"
 		"outColor = texture(map, vUV);\n"
-		//"outColor.a = 1;\n"
-		//"outCOlor = vec4(vUV,0,1);\n"
-		/* "if(tog == 1)\n"
-		"outColor = 1.0 - vColor;\n"
-		"else outColor = vColor;\n"
-		"outColor.r = 0.5+sin(time+gl_FragCoord.x/10)/2.0;\n" */
 		"}\n";
 
 	Shader s = makeShader(vsource, fsource);
 
 	Framebuffer f = { 0, 800, 800 };
 
-	unsigned char pixels[] = { 255,0,255, 255,255,0 };
-	Texture t_magyel = makeTexture(2, 1, 3, pixels);
+	unsigned char pixels[] = { 255,0,255, 
+							   255,255,0,
+							   0,255,0,255,
+							   255,0255,0};
+
+	Texture t_magyel = makeTexture(4, 4, 3, pixels);
 
 	glm::vec2 pos = { 0,0 };
 	float prevTime = 0;
@@ -75,10 +70,10 @@ int main()
 		prevTime = ct;
 
 		glm::vec2 vel = { 0,0 };
-		vel.y += context.getKey('W');
-		vel.x -= context.getKey('A');
-		vel.y -= context.getKey('S');
-		vel.x += context.getKey('D');
+		vel.y += context.getKey('w');
+		vel.x -= context.getKey('a');
+		vel.y -= context.getKey('s');
+		vel.x += context.getKey('d');
 
 		if (glm::length(vel) > 0)
 			pos += glm::normalize(vel) * dt * speed;
@@ -86,7 +81,7 @@ int main()
 		clearFramebuffer(f);
 
 		setUniform(s, 0, (float)context.getTime());
-		setUniform(s, 1, context.getKey(' '));
+		//setUniform(s, 1, context.getKey(' '));
 		setUniform(s, 2, pos.x);
 		setUniform(s, 3, pos.y);
 
