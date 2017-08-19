@@ -32,7 +32,7 @@ int main()
 		"void main ()\n"
 		"{\n"
 		"gl_Position = position;\n"
-		"gl_Position.y *= sin(time*2-position.y)/1.5;\n"
+		"gl_Position.y *= sin(time*2+position.y)/1.5;\n"
 		"vColor = color;\n"
 		"vUV = position.xy;\n"
 		"}\n";
@@ -40,29 +40,33 @@ int main()
 	const char* fsource = // once per pixel
 		"#version 450\n"
 		"out vec4 outColor;\n"
+		"layout(location = 0) uniform float time;\n"
 		"layout(location = 4) uniform sampler2D map;\n"
+		"layout(location = 5) uniform sampler2D mask;\n"
 		"in vec4 vColor;\n"
-		"in vec2  vUV;\n"
+		"in vec2 vUV;\n"
 		"void main ()\n"
 		"{\n"
-		"outColor = texture(map, vUV);\n"
+		"vec2 uv = vUV;\n"
+		"uv.x += sin(time + uv.y);\n"
+		"outColor = texture(map,uv) * texture(mask,vUV).r;\n"
 		"}\n";
 
 	Shader s = makeShader(vsource, fsource);
 
 	Framebuffer f = { 0, 800, 800 };
 
-	unsigned char pixels[] = { 255,0,255, 
-							   255,255,0,
+	unsigned char pixels[] = { 0,255,0,255, 
+							   255,0,255,0,
 							   0,255,0,255,
-							   255,0255,0};
+							   255,0,255,0};
 
-	Texture t_magyel = makeTexture(4, 4, 3, pixels);
+	Texture t_mask = makeTexture(4, 4, 1, pixels);
+	Texture t_magyel = makeTexture(4, 1, 3, pixels);
 
 	glm::vec2 pos = { 0,0 };
 	float prevTime = 0;
 	float speed = 1.2f;
-
 	while (context.step())
 	{
 		float ct = context.getTime();
@@ -86,6 +90,7 @@ int main()
 		setUniform(s, 3, pos.y);
 
 		setUniform(s, 4, t_magyel, 0);
+		setUniform(s, 5, t_mask,   1);
 
 		s0_draw(f, s, g);
 	}
@@ -93,7 +98,7 @@ int main()
 	freeGeometry(g);
 	freeShader(s);
 	freeTexture(t_magyel);
-
+	freeTexture(t_mask);
 	context.term();
 	return 0;
 }
