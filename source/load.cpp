@@ -3,10 +3,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb\stb_image.h"
 #define TINYOBJLOADER_IMPLEMENTATION
-#include<istream>
-#include<fstream>
-#include<iostream>
-#include"obj\tiny_obj_loader.h"
+#include <istream>
+#include <fstream>
+#include <iostream>
+#include "obj\tiny_obj_loader.h"
+
+#include "graphics\Vertex.h"
+#include <random>
 
 Texture loadTexture(const char *path)
 {
@@ -34,11 +37,19 @@ Shader loadShader(const char *vert_path, const char *frag_path)
 {
 	Shader retval = { 0 };
 	
-	std:: string v_source = fileToString(vert_path).c_str();
-	std::string f_source = fileToString(frag_path).c_str();
+	std:: string v_source = fileToString(vert_path);
+	std::string f_source = fileToString(frag_path);
 	
-	retval = makeShader(v_source.c_str, f_source.c_str());
+	retval = makeShader(v_source.c_str(), f_source.c_str());
 	return retval;
+}
+
+glm::vec4 randColor()
+{
+	return{
+		rand() / (float)RAND_MAX,
+		rand() / (float)RAND_MAX,
+		rand() / (float)RAND_MAX, 1 };
 }
 
 Geometry loadGeometry(const char *path)
@@ -53,20 +64,25 @@ Geometry loadGeometry(const char *path)
 
 	size_t vsize = attrib.vertices.size() / 3;
 	Vertex *verts = new Vertex[vsize];
+
+	for (size_t i=0; i <vsize; ++i)
 	{
 		const float *p = &attrib.vertices[i * 3];
-		verts[i].position = {};
+		verts[i].color = randColor();
+		verts[i].position = { p[0],p[1],p[2], 1 };
 	}
 
-	size_t isize shapes[0].mesh.indices.size();
+	size_t isize = shapes[0].mesh.indices.size();
 	size_t *indices = new unsigned[isize];
 
 
 	for (size_t i = 0; i < isize; ++i)
 	{
-		indices[i] = shapes[0].mesh.inices[0].vertex_index;
+		indices[i] = shapes[0].mesh.indices[i].vertex_index;
 	}
 
-	retval = makeGeometry();
+	retval = makeGeometry(verts, vsize, indices, isize);
+	delete[]verts;
+	delete[]indices;
 	return retval;
 }
