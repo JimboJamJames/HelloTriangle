@@ -10,7 +10,7 @@ int main()
 	Context context;
 	context.init(807, 768);
 
-	Texture tex = loadTexture("../../resources/textures/Capture3.png");
+
 
 	Vertex vquad[] = {
 		{ { -1,-1,0,1 },{},{ 0,0 } },
@@ -22,6 +22,11 @@ int main()
 	unsigned quadidx[] = { 0,1,3, 1,2,3 };
 
 	Geometry g = makeGeometry(vquad, 4, quadidx, 6);
+	
+	Texture tex = loadTexture("../../resources/textures/Capture3.png");
+
+	/*Shader sq = loadShader("../../resources/shaders/test.vert",
+						   "../../recources/shaders/test.frag");*/
 
 	Framebuffer f = { 0, 800, 800 };
 
