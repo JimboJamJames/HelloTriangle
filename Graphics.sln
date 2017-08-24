@@ -22,6 +22,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03-tdraw", "..\Project1\Pro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04-FromDisk", "test\04-FromDisk\04-FromDisk.vcxproj", "{0E108C69-18E5-4C00-9A95-2944879CF459}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shaders", "resources\shaders\shaders\shaders.vcxproj", "{08539054-CE81-487D-A6E1-199FF5B81778}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -70,6 +72,14 @@ Global
 		{0E108C69-18E5-4C00-9A95-2944879CF459}.Release|x64.Build.0 = Release|x64
 		{0E108C69-18E5-4C00-9A95-2944879CF459}.Release|x86.ActiveCfg = Release|Win32
 		{0E108C69-18E5-4C00-9A95-2944879CF459}.Release|x86.Build.0 = Release|Win32
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Debug|x64.ActiveCfg = Debug|x64
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Debug|x64.Build.0 = Debug|x64
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Debug|x86.ActiveCfg = Debug|Win32
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Debug|x86.Build.0 = Debug|Win32
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Release|x64.ActiveCfg = Release|x64
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Release|x64.Build.0 = Release|x64
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Release|x86.ActiveCfg = Release|Win32
+		{08539054-CE81-487D-A6E1-199FF5B81778}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

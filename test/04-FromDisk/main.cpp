@@ -10,7 +10,7 @@ int main()
 	Context context;
 	context.init(807, 768);
 
-	Texture tex = loadTexture("../../resources/textures/Capture2.png");
+	Texture tex = loadTexture("../../resources/textures/Capture3.png");
 
 	Vertex vquad[] = {
 		{ { -1,-1,0,1 },{},{ 0,0 } },
