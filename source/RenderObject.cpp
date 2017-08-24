@@ -23,8 +23,8 @@ Geometry makeGeometry(const Vertex *verts, size_t vsize,
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, retval.vbo);
 
 	//Initialize all of our buffers
-	glBufferData(GL_ARRAY_BUFFER, vsize*sizeof(Vertex),
-					verts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vsize * sizeof(Vertex),
+		verts, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 		isize * sizeof(unsigned), idxs, GL_STATIC_DRAW);
 
@@ -34,9 +34,8 @@ Geometry makeGeometry(const Vertex *verts, size_t vsize,
 	glEnableVertexAttribArray(1); // color
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)16);
 
-
 	glEnableVertexAttribArray(2); // color
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)16);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -75,7 +74,7 @@ Shader makeShader(const char *vsource, const char *fsource)
 		char *log = new char[length];
 		glGetShaderInfoLog(vs, length, 0, log);
 		std::cerr << log << std::endl;
-		assert(false &&  "Vertex shader failed to compile!");
+		assert(false && "Vertex shader failed to compile!");
 		delete[] log;
 	}
 #endif
@@ -105,9 +104,9 @@ Shader makeShader(const char *vsource, const char *fsource)
 	if (success == GL_FALSE)
 	{
 		int length = 0;
-		glGetShaderiv(retval.handle, GL_INFO_LOG_LENGTH, &length);
+		glGetProgramiv(retval.handle, GL_INFO_LOG_LENGTH, &length);
 		char *log = new char[length];
-		glGetShaderInfoLog(retval.handle, length, 0, log);
+		glGetProgramInfoLog(retval.handle, length, 0, log);
 		std::cerr << log << std::endl;
 		assert(false && "Program failed to link!");
 		delete[] log;
@@ -126,11 +125,11 @@ void freeShader(Shader &s)
 	s = { 0 };
 }
 
-Texture makeTexture(unsigned w, unsigned h, unsigned c, const unsigned char *pixels)
+Texture makeTexture(unsigned w, unsigned h, unsigned c, const unsigned char * pixels)
 {
-	Texture retval = { 0 };
+	Texture retval{ 0 };
 
-	GLenum f = 0;
+	unsigned f = 0;
 	switch (c)
 	{
 	case 1: f = GL_RED;  break;
@@ -145,11 +144,10 @@ Texture makeTexture(unsigned w, unsigned h, unsigned c, const unsigned char *pix
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, f, w, h, 0, f, GL_UNSIGNED_BYTE, pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, f, w, h, 0, f,
+		GL_UNSIGNED_BYTE, pixels);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-
 	return retval;
 }
 
@@ -158,4 +156,3 @@ void freeTexture(Texture &t)
 	glDeleteTextures(1, &t.handle);
 	t = { 0 };
 }
-
