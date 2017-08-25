@@ -66,7 +66,7 @@ Geometry loadGeometry(const char *path)
 	tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path);
 
 	size_t isize = shapes[0].mesh.indices.size();
-	size_t *indices = new unsigned[isize];
+	size_t* indices = new unsigned[isize];
 
 	size_t vsize = isize;
 	Vertex *verts = new Vertex[vsize];
