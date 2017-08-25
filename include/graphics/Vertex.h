@@ -8,5 +8,5 @@ struct Vertex
 	glm::vec4 color;
 	glm::vec2 UV;
 	glm::vec4 normal;
-	glm::vec2 texCoord;
+	//glm::vec2 texCoord;
 };

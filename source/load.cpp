@@ -55,18 +55,16 @@ glm::vec4 randColor()
 Geometry loadGeometry(const char *path)
 {
 	Geometry retval = { 0,0,0,0 };
-
-
 	tinyobj::attrib_t attrib;				// Vertex Data is stored.
 	std::vector<tinyobj::shape_t> shapes;	// Triangular data, indices.
 	std::vector<tinyobj::material_t> materials;
 	std::string err;
 
-
 	tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path);
 
+	/////////////////////////////////////////////////////////////////
 	size_t isize = shapes[0].mesh.indices.size();
-	size_t* indices = new unsigned[isize];
+	size_t *indices = new unsigned[isize];
 
 	size_t vsize = isize;
 	Vertex *verts = new Vertex[vsize];
@@ -84,9 +82,10 @@ Geometry loadGeometry(const char *path)
 		const float *t = &attrib.texcoords[ti * 2]; // 2x
 
 		verts[i].position = { p[0],p[1],p[2],1 };
-		verts[i].texCoord = { t[0],t[1] };
+		verts[i].UV = { t[0],t[1] };
 		verts[i].normal = { n[0],n[1],n[2],0 };
 	}
+	///////////////////////////////////////////////////////////////////
 
 	retval = makeGeometry(verts, vsize, indices, isize);
 
@@ -94,3 +93,6 @@ Geometry loadGeometry(const char *path)
 	delete[] indices;
 	return retval;
 }
+////////////////////////////////////////////
+1 Comment Collapse
+To correct w
