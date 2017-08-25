@@ -12,14 +12,14 @@ int main()
 
 	Vertex vquad[] = {
 		{ { -1,-1,0,1 },{},{ 0,0 } },
-		{ {  1,-1,0,1 },{},{ 1,0 } },
-		{ {  1, 1,0,1 },{},{ 1,1 } },
+		{ { 1,-1,0,1 },{},{ 1,0 } },
+		{ { 1, 1,0,1 },{},{ 1,1 } },
 		{ { -1, 1,0,1 },{},{ 0,1 } }
 	};
 
 	unsigned quadidx[] = { 0,1,3, 1,2,3 };
 
-	Geometry g = makeGeometry(vquad, 4, quadidx, 6);
+	Geometry quad = makeGeometry(vquad, 4, quadidx, 6);
 
 	Geometry cube = loadGeometry("../../resources/models/cube.obj");
 	
@@ -53,19 +53,21 @@ int main()
 	
 	while (context.step())
 	{
+
 		clearFramebuffer(screen);
 		int loc = 0, tslot = 0;
-		float time = context.getTime();
+		float time = (float)context.getTime();
 
 		//setUniforms(s, loc, tslot, tex, (int)(time*3) % 4 + frame*4, 4,4,x,y);
 
 		glm::mat4 mod_cube = glm::rotate(time, glm::vec3(1, 1, 1));
 		loc = 0; tslot = 0;
+		setFlags(RenderFlag::DEPTH);
 		setUniforms(scube, loc, tslot, mod_cube);
 		s0_draw(screen,scube,cube);
 	}
-	freeGeometry(g);
-	//freeShader(s);
+	freeGeometry(cube);
+	freeShader(scube);
 	freeTexture(tex);
 	context.term();
 	return 0;
