@@ -22,7 +22,7 @@ int main()
 
 	Geometry cube = loadGeometry("../../resources/models/cube.obj");
 	
-	Texture tex = loadTexture("../../resources/textures/Capture3.png");
+	Texture tex = loadTexture("../../resources/textures/Capture2.png");
 
 	
 	Shader scube = loadShader("../../resources/shaders/shaders/cube.vert",
