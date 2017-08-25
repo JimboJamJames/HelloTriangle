@@ -94,5 +94,3 @@ Geometry loadGeometry(const char *path)
 	return retval;
 }
 ////////////////////////////////////////////
-1 Comment Collapse
-To correct w

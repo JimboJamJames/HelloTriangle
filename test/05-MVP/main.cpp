@@ -16,9 +16,9 @@ int main()
 		{ { .1, .1,0,1 },{},{ 1,1 } },
 		{ { -.1,.1,0,1 },{},{ 0,1 } } };
 
-	//unsigned quadidx[] = { 0,1,3, 1,2,3 };
+	unsigned quadidx[] = { 0,1,3, 1,2,3 };
 
-	/*Geometry quad = makeGeometry(vquad, 4, quadidx, 6);
+	Geometry quad = makeGeometry(vquad, 4, quadidx, 6);
 
 	//Geometry cube = loadGeometry("../../resources/models/cube.obj");
 
@@ -27,7 +27,7 @@ int main()
 
 	//Shader scube = loadShader("../../resources/shaders/shaders/cube.vert",
 	//	"../../recources/shaders/shaders/cube.frag");
-	*/
+	
 
 	Geometry ss_geo = loadGeometry("../../resources/models/soulspear.obj");
 	Texture ss_diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");

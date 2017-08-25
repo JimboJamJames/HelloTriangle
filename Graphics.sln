@@ -29,6 +29,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shaders", "resources\shaders\shaders\shaders.vcxproj", "{08539054-CE81-487D-A6E1-199FF5B81778}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05-MVP", "test\05-MVP\05-MVP.vcxproj", "{1076E64E-D99A-47A5-8A4D-9D684182BD46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0670EF0A-AB28-4050-9DA3-C68D1C5D6BEA} = {0670EF0A-AB28-4050-9DA3-C68D1C5D6BEA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
