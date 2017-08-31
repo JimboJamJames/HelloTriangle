@@ -1,66 +1,78 @@
 #include "graphics\Context.h"
-#include "graphics\RenderObject.h"
-#include "graphics\Vertex.h"
-#include "graphics\Draw.h"
+#include "graphics\draw.h"
 #include "graphics\Load.h"
+#include "graphics\RenderObjects.h"
+#include "graphics\Vertex.h"
 #include "glm\ext.hpp"
-#include <ctime>
+
 
 int main()
 {
 	Context context;
-	context.init(800, 600);
+	context.init();
 
 	Vertex vquad[] = {
 		{ { -1,-1,0,1 },{},{ 0,0 },{ 0,0,1,0 } },
 		{ { 1,-1,0,1 },{},{ 1,0 },{ 0,0,1,0 } },
 		{ { 1, 1,0,1 },{},{ 1,1 },{ 0,0,1,0 } },
-		{ { -1,1,0,1 },{},{ 0,1 },{ 0,0,1,0 } }
+		{ { -1, 1,0,1 },{},{ 0,1 },{ 0,0,1,0 } }
 	};
+
 	unsigned quadidx[] = { 0,1,3, 1,2,3 };
 	solveTangents(vquad, 4, quadidx, 6);
 	Geometry quad = makeGeometry(vquad, 4, quadidx, 6);
 
-	Texture tex = loadTexture("../../resources/textures/soulspear_diffuse.tga");
-	Texture tex2 = loadTexture("../../resources/textures/face.jpg");
-	Texture lava = loadTexture("../../resources/textures/lava.png");
-	Geometry soulSpear = loadGeometry("../../resources/models/soulspear.obj");
-	Shader s = loadShader("../../resources/shaders/standard.vert", "../../resources/shaders/standard.frag");
+	Shader standard = loadShader("../../resources/shaders/standard.vert",
+		"../../resources/shaders/standard.frag");
 
-	Framebuffer f = { 0,800,600 };
+	Framebuffer screen = { 0, 800, 600 };
 
-	//camera
-	glm::mat4 cam_view = glm::lookAt(
-		glm::vec3(0, 3, -4), 
-		glm::vec3(0, 1, 0), 
+
+	////////////////////////
+	/// Model Data
+	Geometry  ss_geo = loadGeometry("../../resources/models/soulspear.obj");
+	glm::mat4 ss_model;
+
+	Texture   ss_normal = loadTexture("../../resources/textures/soulspear_normal.tga");
+	Texture   ss_diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");
+	Texture   ss_specular = loadTexture("../../resources/textures/soulspear_specular.tga");
+	float     ss_gloss = 4.0f;
+
+	//////////////////////////
+	// Camera Data
+	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 2, 3),
+		glm::vec3(0, 2, 0),
 		glm::vec3(0, 1, 0));
 	glm::mat4 cam_proj = glm::perspective(45.f, 800.f / 600.f, .01f, 100.f);
 
-	//model
-	glm::mat4 go_model;
+	//////////////////////////
+	// Light
+	glm::vec3 l_dir = glm::normalize(glm::vec3(1, -1, -1));
+	glm::vec4 l_color = glm::vec4(.7, .5, .9, 1);
+	float     l_intensity = 1.0;
+	glm::vec4 l_ambient = glm::vec4(.2, .2, .01, 1);
+	int		  l_type = 0;
 
-	//light direction
-	glm::vec3 lightDir = glm::normalize(glm::vec3(1, -1, 1));
+
 
 	while (context.step())
 	{
-		clearFrameBuffer(f);
-		setFlags(RenderFlag::DEPTH);
-		float fTime = (float)context.getTime();
+		float time = context.getTime();
+		ss_model = glm::rotate(time, glm::vec3(0, 1, 0));
 
-		//go_model = glm::rotate(90.f, glm::vec3(0, 1, 0));
+		clearFramebuffer(screen);
+		setFlags(RenderFlag::DEPTH);
 
 		int loc = 0, slot = 0;
-		setUniforms(s,loc, slot, cam_proj, cam_view, go_model, tex2, lightDir);
-		s0_draw(f, s, quad);
+
+		setUniforms(standard, loc, slot,
+			cam_proj, cam_view,	// Camera data!
+			ss_model, ss_diffuse, ss_specular, ss_normal, ss_gloss, // model data!
+			l_dir, l_color, l_intensity, l_ambient, l_type		  // light data!
+		);
+
+		s0_draw(screen, standard, ss_geo);
 	}
-
-	freeShader(s);
-	freeTexture(tex);
-	freeTexture(tex2);
-	freeTexture(lava);
-	freeGeometry(soulSpear);
-	freeGeometry(quad);
-
+	context.term();
 	return 0;
 }

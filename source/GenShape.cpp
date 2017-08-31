@@ -154,9 +154,9 @@ Geometry makeCheckerboard(int dim, float size)
 		float x = (i % vdim) * step - offset;
 		float y = (i / vdim) * step - offset;
 
-		verts[i].pos = { x,y,0,1 };
+		verts[i].position = { x,y,0,1 };
 		verts[i].color = { rand() / (float)RAND_MAX,rand() / (float)RAND_MAX,rand() / (float)RAND_MAX,1 };
-		verts[i].texCoord = { x,y };
+		verts[i].UV = { x,y };
 
 
 		if (//(i == 1 && dim > 1)||	//SPECIAL cases for 1x1 and 2x2

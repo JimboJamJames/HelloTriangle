@@ -79,12 +79,12 @@ void freeGeometry(Geometry & g)
 glm::vec4 calcTangent(const Vertex &v0, const Vertex &v1, const Vertex &v2)
 {
 	//direction between vertices
-	glm::vec4 p1 = v1.pos - v0.pos;
-	glm::vec4 p2 = v2.pos - v0.pos;
+	glm::vec4 p1 = v1.position - v0.position;
+	glm::vec4 p2 = v2.position - v0.position;
 
 	//direction for uvs
-	glm::vec2 t1 = v1.texCoord - v0.texCoord;
-	glm::vec2 t2 = v2.texCoord - v0.texCoord;
+	glm::vec2 t1 = v1.UV - v0.UV;
+	glm::vec2 t2 = v2.UV - v0.UV;
 
 
 	//get average of some stuff??
