@@ -6,7 +6,7 @@
 #include <istream>
 #include <fstream>
 #include <iostream>
-#include "obj\tiny_obj_loader.h"
+#include "OBJ\tiny_obj_loader.h"
 
 #include "graphics\Vertex.h"
 #include <random>
