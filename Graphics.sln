@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphics", "Graphics.vcxproj", "{0670EF0A-AB28-4050-9DA3-C68D1C5D6BEA}"
 EndProject
@@ -40,6 +40,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06-Lights", "test\06-Lights\06-Lights.vcxproj", "{7B987C9F-B4C8-4EFD-9057-7CA43CB96A0B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09-Shadows", "test\09-Shadows\09-Shadows.vcxproj", "{3731DEAB-7556-4AE9-810E-D44BB7A27B0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0670EF0A-AB28-4050-9DA3-C68D1C5D6BEA} = {0670EF0A-AB28-4050-9DA3-C68D1C5D6BEA}
+		{E00F1E13-6FE0-4C59-85B6-C3539CA2B1C2} = {E00F1E13-6FE0-4C59-85B6-C3539CA2B1C2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

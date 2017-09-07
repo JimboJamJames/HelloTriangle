@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Graphics-master\test\06-Lights\main.cpp">
+    <ClCompile Include="..\..\..\..\..\..\Sergei%27s PC\Source\Repos\HelloTriangle2\test\09-Shadows\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
