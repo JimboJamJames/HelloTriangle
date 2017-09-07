@@ -1,103 +1,71 @@
-   
-#include "graphics\Context.h"
-#include "graphics\RenderObject.h"
+#include "graphics\draw.h"
 #include "graphics\Vertex.h"
-#include "graphics\Draw.h"
+#include "graphics\RenderObjects.h"
+#include "graphics\Context.h"
 #include "graphics\Load.h"
+
 #include "glm\ext.hpp"
-#include <ctime>
 
 int main()
 {
 	Context context;
-	context.init(1000,1000);
+	context.init(800, 800);
 
-	Texture tex = loadTexture("../../resources/textures/Charactervector.png");
-
-	Texture think = loadTexture("../../resources/textures/think.png");
-	Texture angry = loadTexture("../../resources/textures/angry.png");
-	Texture lava = loadTexture("../../resources/textures/lava.png");
-
-	Vertex vquad[] = {
-		{{-1,-1,0,1}, {}, {0,0}},
-		{{1,-1,0,1},{},{1,0}},
-		{{1,1,0,1},{},{1,1}},
-		{{-1,1,0,1},{},{0,1}}
+	Vertex vquad[] = 
+	{
+		{{-1,-1,0,1},{},{0,0}},
+		{{ 1,-1,0,1},{},{1,0}},
+		{{ 1, 1,0,1},{},{1,1}},
+		{{ -1,1,0,1},{},{0,1}} 
 	};
 
 	unsigned quadidx[] = { 0,1,3, 1,2,3 };
 	Geometry quad = makeGeometry(vquad, 4, quadidx, 6);
 
 	Geometry cube = loadGeometry("../../resources/models/cube.obj");
-	Geometry sphere = loadGeometry("../../resources/models/sphere.obj");
 
-	Geometry soulSpear = loadGeometry("../../resources/models/soulspear.obj");
+	Texture tex = loadTexture("../../resources/textures/red.png");
 
 	//Shader s = makeShader(vsource, fsource);
-	Shader s = loadShader("../../resources/shaders/mono.vert", "../../resources/shaders/mono.frag");
-	Shader scube = loadShader("../../resources/shaders/textured.vert", "../../resources/shaders/textured.frag");
-	Shader scube2 = loadShader("../../resources/shaders/textured.vert", "../../resources/shaders/textured.frag");
-	Shader scube3 = loadShader("../../resources/shaders/textured.vert", "../../resources/shaders/textured.frag");
-	Framebuffer f = { 0,1000,1000 };
+	Shader s = loadShader("../../resources/shaders/test.vert", 
+						  "../../resources/shaders/test.frag");
 
+	Shader scube = loadShader("../../resources/shaders/cube.vert",
+							  "../../resources/shaders/cube.frag");
+
+	Framebuffer screen = { 0, 800, 800 };
+
+	float x = 0, y = 0;
 	while (context.step())
 	{
-		clearFrameBuffer(f);
-		setFlags(RenderFlag::DEPTH);
-		float fTime = (float)context.getTime();
+		clearFramebuffer(screen);
+		float time = context.getTime();
 
-		int speed = 1;
-		glm::mat4 modCube = glm::rotate(fTime * speed, glm::vec3(1, 1.3,.2));
-		glm::mat4 modSpear = 
-			glm::rotate(fTime * speed, glm::vec3(1, 1.3, .2))*
-			glm::scale(glm::vec3(.2, .2, .2))*
-			glm::translate(glm::vec3(1,-5,1));
+		int frame = 3;
+		frame += context.getKey('A') * 3;
+		frame += context.getKey('D') * 2;
+		frame += context.getKey('W') * 1;
+		frame % 4;
 
-		//SPEHRE STUFF
-		glm::mat4 modSphere1 = glm::rotate(fTime * speed, glm::vec3(0, 1, 0)) *
-			glm::scale(glm::vec3(.8,.8,.8));
-		glm::mat4 modSphere2 = 
-			glm::rotate(fTime * speed * 2, glm::vec3(0, 0, 1)) *
-			glm::translate(glm::vec3(.8,0,0)) *
-			glm::rotate(fTime * speed, glm::vec3(1, 0, 0)) *
-			glm::scale(glm::vec3(.3,.3,.3));
-		glm::mat4 modSphere3 =
-			glm::rotate(fTime * speed, glm::vec3(0, 0, 1)) *
-			glm::translate(glm::vec3(-3, 0, 0)) *
-			glm::scale(glm::vec3(.15,.15,.15));
+		x += context.getKey('D') * .016;
+		y += context.getKey('W') * .016;
+		x -= context.getKey('A') * .016;
+		y -= context.getKey('S') * .016;
 
 		int loc = 0, tslot = 0;
-	//	setUniforms(s, loc, tslot, tex, 0, 4, 4, 1, (int)context.getTime());
+		setUniforms(s, loc, tslot, tex, (int)(time*3)%4+frame*4,4,4,x,y);
+		s0_draw(screen, s, quad);
 
-		//s0_draw(f, s, quad);
+		glm::mat4 mod_cube = glm::rotate(time, glm::vec3(1, 1, 1));
+
+		setFlags(RenderFlag::DEPTH);
 
 		loc = 0, tslot = 0;
-		setUniforms(scube, loc, tslot, modSphere1, fTime, think);
-		s0_draw(f, scube, sphere);
-	
-		loc = 0, tslot = 0;
-		setUniforms(scube, loc, tslot, modSphere2, fTime, angry);	
-		//s0_draw(f, scube, sphere);
-		
-		loc = 0, tslot = 0;
-		setUniforms(scube, loc, tslot, modSphere3, fTime, lava);
-		//s0_draw(f, scube, sphere);
+		setUniforms(scube, loc, tslot, mod_cube);
+		s0_draw(screen, scube, cube);
 	}
 
-	freeShader(s);
-	freeShader(scube);
-	freeShader(scube2);
-	freeShader(scube3);
-
-	freeTexture(tex);
-	freeTexture(think);
-	freeTexture(angry);
-	freeTexture(lava);
-
-	freeGeometry(quad);
-	freeGeometry(soulSpear);
-	freeGeometry(cube);
-	freeGeometry(sphere);
+	context.term();
 
 	return 0;
-}
+};

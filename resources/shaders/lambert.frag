@@ -1,23 +1,32 @@
 #version 450
 
+out vec4 outColor;
+
 in vec2 vUV;
-in vec4 vPos;
+in vec3 vPos;
 in vec3 vNormal;
 
-layout (location = 3) uniform sampler2D diffuse;
-layout (location = 4) uniform vec3 lightDirection;
-layout (location = 5) uniform vec4 lightColor;
+layout (location = 3) uniform sampler2D map;
 
-out vec4 outColor;
+layout (location = 4) uniform vec3 LP;
+layout (location = 5) uniform vec3 lightDirection;
+layout (location = 6) uniform vec4 lightColor;
 
 void main()
 {
-	vec4 surfaceColor = texture(diffuse, vUV);
+	vec4 surfaceColor = texture(map, vUV);
+	vec3 DISP = vPos - LP;
+
+	float d = length(DISP);
+	float attenuation = 1.0/(d*d);
+	vec3 L = normalize(DISP);
+	vec3 N = vNormal;
+
+	float lambertianFactor = max(0,dot(N, L));
+
+	vec4 lambertianTerm = surfaceColor * lambertianFactor * lightColor;
 	
-	//max will clamp the factor so it doesn't go negative
-	float lamFactor = max(dot(vNormal, -lightDirection), 0);
+    outColor = lambertianTerm;
 
-	vec4 lamTerm = surfaceColor * lamFactor * lightColor;
-
-	outColor = lamTerm;
+	outColor = vec4(1,1,0,1);
 }

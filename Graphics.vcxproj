@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{62F23E81-192E-4FD9-9E63-92D501EC3A37}</ProjectGuid>
+    <ProjectGuid>{0670EF0A-AB28-4050-9DA3-C68D1C5D6BEA}</ProjectGuid>
     <RootNamespace>Graphics</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -74,11 +74,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;$(SolutionDir)dependencies\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)deps\include\;$(SolutionDir)include\</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib; glew32s.lib; glfw3.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)deps\lib\</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -98,21 +101,22 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)deps\include\</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib; glew32s.lib; glfw3.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)deps\lib\</AdditionalLibraryDirectories>
+    </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
-    <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -129,18 +133,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Context.cpp" />
-    <ClCompile Include="source\Draw.cpp" />
-    <ClCompile Include="source\GenShape.cpp" />
+    <ClCompile Include="source\draw.cpp" />
     <ClCompile Include="source\Load.cpp" />
-    <ClCompile Include="source\RenderObjects.cpp" />
+    <ClCompile Include="source\RenderObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics\Context.h" />
-    <ClInclude Include="include\graphics\Draw.h" />
-    <ClInclude Include="include\graphics\GenShape.h" />
+    <ClInclude Include="include\graphics\draw.h" />
     <ClInclude Include="include\graphics\Load.h" />
+    <ClInclude Include="include\graphics\RenderObjects.h" />
     <ClInclude Include="include\graphics\Vertex.h" />
-    <ClInclude Include="source\glincl.h" />
+    <ClInclude Include="source\glinc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

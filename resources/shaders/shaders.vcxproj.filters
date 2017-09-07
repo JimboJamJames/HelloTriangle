@@ -15,16 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.frag">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="test.vert">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="mono.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="mono.frag">
+    <None Include="test.frag">
       <Filter>Source Files</Filter>
     </None>
     <None Include="cube.vert">
@@ -33,28 +27,37 @@
     <None Include="cube.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="textured.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="textured.vert">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="mvplite.vert">
       <Filter>Source Files</Filter>
     </None>
     <None Include="mvplite.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="lambert.frag">
+    <None Include="lambert.vert">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="lambert.vert">
+    <None Include="lambert.frag">
       <Filter>Source Files</Filter>
     </None>
     <None Include="standard.vert">
       <Filter>Source Files</Filter>
     </None>
     <None Include="standard.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="quad.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="quad.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="shadows.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="shadows.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="direct.vert">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
