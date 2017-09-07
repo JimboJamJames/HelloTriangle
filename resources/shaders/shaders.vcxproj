@@ -120,8 +120,8 @@
     <None Include="mvplite.vert" />
     <None Include="quad.frag" />
     <None Include="quad.vert" />
-    <None Include="shadows.frag" />
-    <None Include="shadows.vert" />
+    <None Include="shadow.frag" />
+    <None Include="shadow.vert" />
     <None Include="standard.frag" />
     <None Include="standard.vert" />
     <None Include="test.frag" />

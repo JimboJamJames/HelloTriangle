@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\Sergei%27s PC\Source\Repos\HelloTriangle2\test\09-Shadows\main.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3731DEAB-7556-4AE9-810E-D44BB7A27B0C}</ProjectGuid>

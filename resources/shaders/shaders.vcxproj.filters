@@ -51,16 +51,16 @@
     <None Include="quad.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="shadows.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="shadows.frag">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="direct.vert">
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\..\..\..\..\..\Sergei%27s PC\Source\Repos\HelloTriangle2\resources\shaders\direct.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="shadow.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="shadow.vert">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
