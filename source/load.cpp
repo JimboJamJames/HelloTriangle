@@ -36,7 +36,7 @@ Texture loadTexture(const char *path)
 //
 //}
 
-std::string readFile(const char *filePath) 
+std::string readFile(const char *filePath)
 {
 	std::string content;
 	std::ifstream fileStream(filePath, std::ios::in);
@@ -109,7 +109,7 @@ Geometry loadGeometry(const char *path)
 		int ni = shapes[0].mesh.indices[i].normal_index;
 		int ti = shapes[0].mesh.indices[i].texcoord_index;
 
-		const float *p = &attrib.vertices[pi*3];
+		const float *p = &attrib.vertices[pi * 3];
 		const float *n = &attrib.normals[ni * 3];
 		const float *t = &attrib.texcoords[ti * 2];
 

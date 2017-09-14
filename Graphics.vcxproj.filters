@@ -27,7 +27,7 @@
     <ClCompile Include="source\Load.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects.cpp">
+    <ClCompile Include="source\GameObjects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <ClInclude Include="include\graphics\Load.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjects.h">
+    <ClInclude Include="include\graphics\GameObjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

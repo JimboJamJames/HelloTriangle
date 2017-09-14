@@ -13,7 +13,7 @@ struct Camera
 
 struct SpecGloss
 {
-	Geometry geol;
+	Geometry geo;
 
 	glm::mat4 model;
 	Texture diffuse;
@@ -49,7 +49,7 @@ struct DirectionalLight
 	}
 
 	glm::vec4 color;
-	float intesity;
+	float intensity;
 };
 
 namespace __internal
