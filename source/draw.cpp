@@ -5,8 +5,8 @@
 #include "glm/gtc/type_ptr.hpp"
 
 void s0_draw(const Framebuffer &f,
-			 const Shader &s,
-			 const Geometry &g)
+	const Shader &s,
+	const Geometry &g)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, f.handle);
 	glUseProgram(s.handle);
@@ -82,7 +82,14 @@ void clearFramebuffer(const Framebuffer &f, bool color, bool depth)
 void setFlags(int flags)
 {
 	// depth testing
-	if (flags & RenderFlag::DEPTH) 
+	if (flags & RenderFlag::DEPTH)
 		glEnable(GL_DEPTH_TEST);
 	else glDisable(GL_DEPTH_TEST);
+
+	if (flags & RenderFlag::ADDITIVE)
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+	}
+	else glDisable(GL_BLEND);
 }
