@@ -132,12 +132,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObjects.cpp" />
     <ClCompile Include="source\Context.cpp" />
     <ClCompile Include="source\draw.cpp" />
     <ClCompile Include="source\Load.cpp" />
     <ClCompile Include="source\RenderObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObjects.h" />
     <ClInclude Include="include\graphics\Context.h" />
     <ClInclude Include="include\graphics\draw.h" />
     <ClInclude Include="include\graphics\Load.h" />

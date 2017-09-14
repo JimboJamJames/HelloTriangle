@@ -10,9 +10,9 @@ in vec4 vPos;
 uniform float shadowBias = 0.01;
 
 uniform mat4 clipToUV = mat4(0.5f, 0.0f, 0.0f, 0.0f,
-							 0.0f, 0.5f, 0.5f, 0.0f,
-							 0.0f, 0.0f, 0.5f, 0.0f,
-							 0.5f, 0.5f, 0.5f, 1.0f);
+							       0.0f, 0.5f, 0.5f, 0.0f,
+							       0.0f, 0.0f, 0.5f, 0.0f,
+							       0.5f, 0.5f, 0.5f, 1.0f);
 
 out vec4 outColor;
 
@@ -26,5 +26,5 @@ void main()
 	visibility - 0;
 	}
 
-	outColor = vec4(1,1,0,1) * visibility;
+	outColor = vec4(1,0,0,1) * visibility;
 }
