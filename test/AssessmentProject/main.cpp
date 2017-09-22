@@ -34,9 +34,9 @@ void main()
 	objects[0].diffuse = loadTexture("../../resources/textures/sand.jpg");
 	objects[0].gloss = 4;
 
-	CubeTexture lcb = loadCubeMap("../../resources/textures/skybox/dejavu_bk.tga", "../../resources/textures/skybox/dejavu_ft.tga",
-								  "../../resources/textures/skybox/dejavu_dn.tga", "../../resources/textures/skybox/dejavu_up.tga",
-								  "../../resources/textures/skybox/dejavu_lf.tga", "../../resources/textures/skybox/dejavu_rt.tga");
+	CubeTexture lcb = loadCubeMap("../../resources/textures/skybox/peaks_bk.tga", "../../resources/textures/skybox/peaks_ft.tga",
+								  "../../resources/textures/skybox/peaks_up.tga", "../../resources/textures/skybox/peaks_dn.tga",
+								  "../../resources/textures/skybox/peaks_lf.tga", "../../resources/textures/skybox/peaks_rt.tga");
 
 	// Camera
 	Camera cam;
