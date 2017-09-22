@@ -51,16 +51,52 @@
     <None Include="quad.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="direct.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\..\..\..\..\Sergei%27s PC\Source\Repos\HelloTriangle2\resources\shaders\direct.frag">
+    <None Include="shadow.vert">
       <Filter>Source Files</Filter>
     </None>
     <None Include="shadow.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="shadow.vert">
+    <None Include="direct.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="direct.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="gpass.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="gpass.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="cpass.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="cpass.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="lpassD.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="lpassD.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Assessment.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Assessment.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Feedback.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Feedback.geo">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Cubemap.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Cubemap.vert">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

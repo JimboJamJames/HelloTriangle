@@ -5,11 +5,15 @@ struct Geometry;
 struct Shader;
 struct Framebuffer;
 struct Texture;
+struct CubeTexture;
+
+#include <glm\fwd.hpp>
 
 void s0_draw(const Framebuffer &f,
 			 const Shader &s,
 			 const Geometry &g);
 
+//void clearFramebuffer(const Framebuffer &r, bool color = true, bool depth = true);
 
 void setUniform(const Shader &s, int location, float value);
 void setUniform(const Shader &s, int location, int value);
@@ -26,6 +30,7 @@ namespace __internal
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const CubeTexture &val);
 }
 
 template<typename T, typename ...U>
@@ -44,5 +49,12 @@ void setUniforms(const Shader &s, int &loc_io, int &tex_io, const T &val)
 
 void clearFramebuffer(const Framebuffer &f, bool color = true, bool depth = true);
 
-enum RenderFlag{DEPTH = 1};
+
+enum RenderFlag
+{
+	NONE = 0,
+	DEPTH = 1,
+	ADDITIVE = 2,
+};
+
 void setFlags(int flags);

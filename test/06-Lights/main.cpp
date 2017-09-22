@@ -22,7 +22,7 @@ int main()
 	Geometry ss_geo = loadGeometry("../../resources/models/soulspear.obj");
 	Texture ss_diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");
 	Shader lambert = loadShader("../../resources/shaders/lambert.vert",
-		"../../resources/shaders/lambert.frag");
+								"../../resources/shaders/lambert.frag");
 
 	Texture soil_diffuse = loadTexture("../../resources/textures/sand.jpg");
 
@@ -44,21 +44,21 @@ int main()
 		float time = (float)context.getTime();
 
 		glm::mat4 go_model = glm::rotate(time, glm::vec3(0.f, 1.f, 0.f));
-		glm::mat4 modq = glm::rotate(glm::radians(90.f), glm::vec3(-1, 0, 0)) *
-			glm::scale(glm::vec3(5, 5, 1));
+		glm::mat4 modq = glm::rotate(glm::radians(90.f), glm::vec3(-1, 0, 0)) * 
+						 glm::scale(glm::vec3(5, 5, 1));
 
 		setFlags(RenderFlag::DEPTH);
 		clearFramebuffer(screen);
 
 		int loc = 0, tslot = 0;
-		setUniforms(lambert, loc, tslot,
-			cam_proj, cam_view, go_model, ss_diffuse,
-			lightPos, lightColor);
+		setUniforms(lambert, loc, tslot, 
+					cam_proj, cam_view, go_model, ss_diffuse,
+											lightPos, lightColor);
 
 		loc = 0, tslot = 0;
-		setUniforms(lambert, loc, tslot,
-			cam_proj, cam_view, modq, soil_diffuse,
-			lightPos, lightColor);
+		setUniforms(lambert, loc, tslot, 
+					cam_proj, cam_view, modq, soil_diffuse,
+											lightPos, lightColor);
 
 		s0_draw(screen, lambert, ss_geo);
 	}
