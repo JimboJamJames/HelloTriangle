@@ -10,3 +10,4 @@ void main()
 {
 	gl_Position = lproj * lview * model * position;
 }
+
